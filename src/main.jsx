@@ -9,11 +9,16 @@ import {
 
 import AuthProvider from './components/AuthProvider';
 import Login from './components/Login';
+import TaskBoard from './components/TaskBoard';
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <Login></Login>
+  },
+  {
+    path: "/task",
+    element: <TaskBoard></TaskBoard>
   },
 ]);
 
