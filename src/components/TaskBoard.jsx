@@ -2,26 +2,33 @@ import { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import { AuthContext } from "./AuthProvider";
+import Card from "./Card";
+
 
 const categories = ["To-Do", "In Progress", "Done"];
 
 const TaskBoard = () => {
     const {user} = useContext(AuthContext)
-  const [tasks, setTasks] = useState([]);
-  const [newTask, setNewTask] = useState({ title: "", description: ""});
+    const [tasks, setTasks] = useState([]);
+    const [newTask, setNewTask] = useState({ title: "", description: ""});
 
+ 
   useEffect(() => {
-    fetchTasks();
-  }, []);
-
-  const fetchTasks = async () => {
-    try {
-      const res = await axios.get(`${import.meta.env.VITE_API_URL}/tasks/${user.email}`);
-      setTasks(res.data);
-    } catch (error) {
-      console.error("Error fetching tasks", error);
+    if (user) {
+        fetchTasks();
     }
-  };
+}, [user]);
+
+const fetchTasks = async () => {
+    try {
+        const res = await axios.get(`${import.meta.env.VITE_API_URL}/tasks/${user.email}`);
+        setTasks(res.data);
+    } catch (error) {
+        console.error("Error fetching tasks", error);
+    }
+};
+
+  // console.log(tasks)
   
   //   add task
 
@@ -39,47 +46,51 @@ const TaskBoard = () => {
 
 //   const updateTask = async (id, updatedTask) => {
 //     try {
-//       await axios.put(`${import.meta.env.VITE_API_URL}/tasks/${id}`, updatedTask);
-//       setTasks(tasks.map((task) => (task._id === id ? updatedTask : task)));
+//         await axios.put(`${import.meta.env.VITE_API_URL}/tasks/${id}`, updatedTask);
+
+//         setTasks(tasks.map((task) => 
+//             task._id === id ? { ...task, ...updatedTask } : task
+//         ));
 //     } catch (error) {
-//       console.error("Error updating task", error);
+//         console.error("Error updating task", error);
 //     }
-//   };
+// };
 
 
-//   const deleteTask = async (id) => {
-//     try {
-//       await axios.delete(`${import.meta.env.VITE_API_URL}/tasks/${id}`);
-//       setTasks(tasks.filter((task) => task._id !== id));
-//     } catch (error) {
-//       console.error("Error deleting task", error);
-//     }
-//   };
+  // delete task
+  const deleteTask = async (id) => {
+    try {
+      await axios.delete(`${import.meta.env.VITE_API_URL}/tasks/${id}`);
+      setTasks(tasks.filter((task) => task._id !== id));
+    } catch (error) {
+      console.error("Error deleting task", error);
+    }
+  };
 
-//   const handleDragStart = (e, taskId) => {
-//     e.dataTransfer.setData("taskId", taskId);
-//   };
+  const handleDragStart = (e, taskId) => {
+    e.dataTransfer.setData("taskId", taskId);
+  };
 
-//   const handleDrop = async (e, newCategory) => {
-//     e.preventDefault();
-//     const taskId = e.dataTransfer.getData("taskId");
-//     const task = tasks.find((t) => t._id === taskId);
+  const handleDrop = async (e, newCategory) => {
+    e.preventDefault();
+    const taskId = e.dataTransfer.getData("taskId");
+    const task = tasks.find((t) => t._id === taskId);
 
-//     if (task.category !== newCategory) {
-//       const updatedTask = { ...task, category: newCategory };
-//       await updateTask(taskId, updatedTask);
-//     }
-//   };
+    if (task.category !== newCategory) {
+      const updatedTask = { ...task, category: newCategory };
+      await updateTask(taskId, updatedTask);
+    }
+  };
 
   return (
-    <div className="w-11/12 mx-auto">
+    <div className="w-10/12 mx-auto">
         <div className="p-6">
       <h1 className="text-2xl font-bold text-center mb-4">Task Management</h1>
 
       {/* add task */}
 
       <div className="mb-6 flex gap-4">
-        <input
+         <input
           type="text"
           placeholder="Task Title"
           maxLength={50}
@@ -100,8 +111,7 @@ const TaskBoard = () => {
         </button>
       </div>
 
-      {/* Task Columns */}
-      <div className="grid lg:grid-cols-3 grid-cols-1 md:grid-cols-2 gap-4">
+      <div className="grid lg:grid-cols-3 grid-cols-1 md:grid-cols-2 gap-5">
         {/* {categories.map((category) => (
           <div
             key={category}
@@ -138,16 +148,9 @@ const TaskBoard = () => {
               ))}
           </div>
         ))} */}
-        <div className="card bg-neutral text-neutral-content w-96">
-  <div className="card-body items-center text-center">
-    <h2 className="card-title">Cookies!</h2>
-    <p>We are using cookies for no reason.</p>
-    <div className="card-actions justify-end">
-      <button className="btn btn-primary">Accept</button>
-      <button className="btn btn-ghost">Deny</button>
-    </div>
-  </div>
-</div>
+        {
+            tasks.map(task => <Card key={task._id} task={task} deleteTask={deleteTask} ></Card>)
+        }
       </div>
       <Link to='/'>
         <button className="btn bg-purple-500 mt-5">Go Back to Home --</button>
@@ -158,5 +161,7 @@ const TaskBoard = () => {
 };
 
 export default TaskBoard;
+
+
 
 

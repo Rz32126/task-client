@@ -10,6 +10,7 @@ import {
 import AuthProvider from './components/AuthProvider';
 import Login from './components/Login';
 import TaskBoard from './components/TaskBoard';
+import Update from './components/Update';
 
 const router = createBrowserRouter([
   {
@@ -20,6 +21,10 @@ const router = createBrowserRouter([
     path: "/task",
     element: <TaskBoard></TaskBoard>
   },
+  {
+    path: "/update/:id",
+    element: <Update></Update>
+  }
 ]);
 
 createRoot(document.getElementById('root')).render(
