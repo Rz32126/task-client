@@ -1,8 +1,75 @@
-# React + Vite
+# Task Management Application
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## 📌 Description
+A simple and efficient task management application built with **Vite.js (React)** for the frontend and **Express.js + MongoDB** for the backend. real-time updates, and Firebase Google Authentication.
 
-Currently, two official plugins are available:
+## 🚀 Live Demo
+🔗 [Live App] : 
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 📦 Dependencies
+### **Frontend Dependencies**
+- React
+- React Router
+- Axios
+- Tailwind CSS
+- Firebase (for authentication)
+- React Hot Toast (for notifications)
+
+### **Backend Dependencies**
+- Express.js
+- MongoDB & Mongoose
+- CORS
+- Dotenv
+- Firebase Admin SDK
+
+## 🛠 Installation Steps
+### **1️⃣ Clone the Repository**
+
+
+### **2️⃣ Install Dependencies**
+#### Install frontend dependencies:
+
+#### Install backend dependencies:
+
+
+### **3️⃣ Set Up Environment Variables**
+Create a `.env` file in both the **client** and **server** directories with the following variables:
+#### **Client/.env**
+
+
+
+#### **Server/.env**
+```
+MONGO_URI=your_mongodb_connection_string
+PORT=5000
+FIREBASE_ADMIN_SDK=your_firebase_admin_sdk_json
+```
+
+### **4️⃣ Start the Application**
+#### **Run the backend**
+```sh
+cd server
+npm start
+```
+#### **Run the frontend**
+```sh
+cd client
+npm run dev
+```
+
+## ⚙️ Technologies Used
+- **Frontend:** Vite.js (React), Tailwind CSS, Axios, Firebase
+- **Backend:** Express.js, MongoDB, Mongoose, Firebase Admin SDK
+- **Authentication:** Firebase Google Sign-In
+- **Real-Time Updates:** MongoDB Change Streams, WebSockets, or Optimistic UI Updates
+
+## 🎯 Features
+- **Task Management:** Add, edit, delete, and reorder tasks
+- **Drag-and-Drop:** Move tasks between categories (**To-Do, In Progress, Done**)
+- **Real-Time Synchronization**
+- **Authentication:** Google Sign-In with Firebase
+- **Dark Mode Support**
+- **Minimalist & Responsive UI**
+
+
+
