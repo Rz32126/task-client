@@ -22,6 +22,15 @@ A simple and efficient task management application built with **Vite.js (React)*
 - Dotenv
 - Firebase Admin SDK
 
+🛠 Installation & Setup
+1️⃣ Clone the Repository
+
+git clone https://github.com/your-username/task-management-app.git
+cd task-management-app
+
+2️⃣ Setup the Backend
+cd backend
+npm install
 
 ## 🎯 Features
 - **Task Management:** Add, edit, delete, and reorder tasks
